@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/calendar': 'http://localhost:8082',
-      '/api': 'http://localhost:8080'
+      '/api': 'http://localhost:8080',
+      '/crew': 'http://localhost:8001'
     }
   }
 })
