@@ -1,11 +1,11 @@
-name: CI
+name: E2E Tests
 on:
   push:
     branches: [master, main]
   pull_request:
     branches: [master, main]
 jobs:
-  build:
+  e2e:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,7 +13,5 @@ jobs:
         with:
           node-version: '20'
       - run: npm ci
-      - run: npm run lint
-        continue-on-error: true
-      - run: npm run build
-      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
