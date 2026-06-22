@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dumbbell, LayoutDashboard, ListChevronDown, CalendarDays, Menu, X } from 'lucide-react';
+import { Dumbbell, LayoutDashboard, CalendarDays, Menu, X } from 'lucide-react';
 import DashboardPage from './pages/DashboardPage';
 import LevelsPage from './pages/LevelsPage';
 import PlannerPage from './pages/PlannerPage';
