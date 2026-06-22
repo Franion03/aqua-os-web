@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+# 🌊 aqua-os-web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React frontend for water polo club management — dashboards, training levels, and session planning.
 
-Currently, two official plugins are available:
+## Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+TypeScript SPA built with Vite, React, and Tailwind CSS. Proxies API calls to the backend service.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+  pages/
+    DashboardPage    → club overview
+    LevelsPage       → training level browser
+    PlannerPage      → session planner
+  components/
+    ExerciseForm     → exercise creation form
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Prerequisites
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Node.js 18+
+- npm
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Run Locally
+
+```bash
+npm install
+npm run dev
 ```
+
+App starts on **http://localhost:5173** — proxies `/api` to `localhost:8080`.
+
+## Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `VITE_API_URL` | Backend API URL (if not using proxy) | `/api` |
+
+## Docker
+
+```bash
+docker build -t aqua-os-web .
+docker run -p 80:80 aqua-os-web
+```
+
+Production uses nginx to serve static files and reverse-proxy API requests.
+
+## Related Repos
+
+| Repo | Description |
+|------|-------------|
+| [aqua-os-backend](../aqua-os-backend) | Go REST API |
+| [aqua-os-crew](../aqua-os-crew) | AI agents (CrewAI) |
+| [aqua-os-calendar](../aqua-os-calendar) | Game calendar service |
+| [aqua-os-infrastructure](../aqua-os-infrastructure) | Terraform AWS infra |
+
+## License
+
+GPL-3.0
